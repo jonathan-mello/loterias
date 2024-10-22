@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Sena</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2F4F4F;
+            color: #FFF;
+        }
+
+        .subtitle {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .header {
+            padding-top: 20px;
+        }
+
+        .container {
+            align-items: top;
+        }
+
+        .btn {
+            cursor: pointer;
+            padding: 0px 25px;
+        }
+
+
+        .filterNumber {
+            padding: 12px;
+            margin: 20px 580px;
+            cursor: pointer;
+            border: solid;
+            background-color: #171817;
+            text-align: center;
+        }
+
+        .filterCity {
+            padding: 12px;
+            margin: 20px 580px;
+            cursor: pointer;
+            border: solid;
+            text-align: center;
+            background-color: #696b6a;
+        }
+
+        .btnSend {
+            padding: 12px;
+            margin: 20px 580px;
+            cursor: pointer;
+            border: solid;
+            text-align: center;
+            background-color: #009148;
+        }
+
+        .filterNumber:hover {
+            color: #000000;
+        }
+        
+        .btnSend:hover {
+            color: #000000;
+        }
+
+        .filterCity:hover {
+            color: #000000;
+        }
+
+        .form {
+            font-size: 14px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        label {
+            width: 100px;
+            display: inline-block;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            color: #FFF;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header"></div>
+    <div class="container">
+
+
+        <div class="subtitle">VEJA SE VOCÊ GANHARIA NA MEGA SENA OU SE JÁ HOUVERAM VENCEDORES EM SUA CIDADE</div>
+
+        <div class="btn">
+            <div id="btnNumber" class="filterNumber">Filtrar por números</div>
+            <div id="btnCity" class="filterCity">Filtrar por cidade</div>
+        </div>
+    </div>
+
+    <form class="form" id="myForm">
+
+        <label for="number1">NÚMERO 1*</label>
+        <input type="number" id="number1" name="number1" required>
+        <br><br>
+        <label for="number2">NÚMERO 2*</label>
+        <input type="number" id="number2" name="number2" required>
+        <br><br>
+        <label for="number3">NÚMERO 3*</label>
+        <input type="number" id="number3" name="number3" required>
+        <br><br>
+        <label for="number4">NÚMERO 4*</label>
+        <input type="number" id="number4" name="number4" required>
+        <br><br>
+        <label for="number5">NÚMERO 5</label>
+        <input type="number" id="number5" name="number5" required>
+        <br><br>
+        <label for="number6">NÚMERO 6</label>
+        <input type="number" id="number6" name="number6" required>
+
+    </form>
+
+    <div class="btn">
+        <div id="btnSend" class="btnSend">Buscar</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>CONCURSO</th>
+                <th>DIA</th>
+                <th>DZ 1</th>
+                <th>DZ 2</th>
+                <th>DZ 3</th>
+                <th>DZ 4</th>
+                <th>DZ 5</th>
+                <th>DZ 6</th>
+                <th>Nº DE VENCEDORES</th>
+                <th>PREMIO SENA</th>
+                <th>PREMIO ACUMULADO</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    
+
+
+    <script>
+        document.getElementById("btnNumber").addEventListener("click", function () {
+            window.location.href = "/numbers";
+        });
+
+        document.getElementById("btnCity").addEventListener("click", function () {
+            window.location.href = "/cities";
+        });
+    </script>
+
+</body>
+
+</html>

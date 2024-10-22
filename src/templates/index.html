@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Sena</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2F4F4F;
+            color: #FFF;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            text-align: center;
+
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .header {
+            padding-top: 20px;
+        }
+
+        .container {
+            align-items: top;
+        }
+
+        .btn {
+            cursor: pointer;
+            padding: 0px 25px;
+        }
+
+
+        .filterNumber {
+            padding: 12px;
+            margin: 20px 580px;
+            cursor: pointer;
+            border: solid;
+            background-color: #171817;
+            text-align: center;
+        }
+
+        .filterCity {
+            padding: 12px;
+            margin: 20px 580px;
+            cursor: pointer;
+            border: solid;
+            text-align: center;
+            background-color: #696b6a;
+        }
+
+        .filterNumber:hover {
+            color: #000000;
+        }
+
+        .filterCity:hover {
+            color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header"></div>
+    <div class="container">
+
+        <div class="subtitle"><strong>VEJA SE VOCÊ GANHARIA NA MEGA SENA OU SE JÁ HOUVERAM VENCEDORES EM SUA CIDADE</strong></div>
+
+            <div class="btn">
+                <div id="btnNumber" class="filterNumber">Filtrar por números</div>
+                <div id="btnCity" class="filterCity">Filtrar por cidade</div>
+            </div>
+        </div>
+
+
+        <script>
+            document.getElementById("btnNumber").addEventListener("click", function () {
+                window.location.href = "/numbers";
+            });
+
+            document.getElementById("btnCity").addEventListener("click", function () {
+                window.location.href = "/cities";
+            });
+        </script>
+
+</body>
+
+</html>
