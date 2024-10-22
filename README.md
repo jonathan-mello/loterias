@@ -1,6 +1,6 @@
-# Insight API
+# Loterias API
 
-Essa é a API de uma aplicacao que foi desenvolvida para buscar dados do Censo de nomes do IBGE realizando a manipulação dos dados e persistindo-os.
+Essa é a API de uma aplicacao que foi desenvolvida para buscar dados da Mega Sena, filtrá-los e trazer informações úteis ao usuário.
 
 ## Tecnologias Utilizadas
 
