@@ -13,9 +13,10 @@
         }
 
         .subtitle {
-            font-size: 16px;
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
             text-align: center;
-
         }
 
         th,
@@ -56,12 +57,71 @@
             background-color: #696b6a;
         }
 
+        .btnSend {
+            padding: 12px;
+            margin: 1% 45%;
+            cursor: pointer;
+            border: solid;
+            text-align: center;
+            background-color: #009148;
+        }
+
+        .btnClean {
+            padding: 12px;
+            margin: 1% 45%;
+            cursor: pointer;
+            border: solid;
+            text-align: center;
+            background-color: #78867f;
+        }
+
         .filterNumber:hover {
+            color: #000000;
+        }
+
+        .btnSend:hover {
             color: #000000;
         }
 
         .filterCity:hover {
             color: #000000;
+        }
+
+        .form {
+            font-size: 14px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        label {
+            width: 100px;
+            display: inline-block;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            color: #FFF;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
         }
     </style>
 </head>
@@ -70,24 +130,145 @@
     <div class="header"></div>
     <div class="container">
 
-        <div class="subtitle"><strong>VEJA SE VOCÊ GANHARIA NA MEGA SENA OU SE JÁ HOUVERAM VENCEDORES EM SUA CIDADE</strong></div>
+        <div class="subtitle">VEJA SE VOCÊ GANHARIA NA MEGA SENA INFORMANDO PELO MENOS 3 NÚMEROS</div>
 
-            <div class="btn">
-                <div id="btnNumber" class="filterNumber">Filtrar por números</div>
-                <div id="btnCity" class="filterCity">Filtrar por cidade</div>
-            </div>
-        </div>
+    </div>
+
+    <form class="form" id="myForm">
+
+        <label for="number1">NÚMERO 1*</label>
+        <input type="number" id="number1" name="number1" required>
+        <br><br>
+        <label for="number2">NÚMERO 2*</label>
+        <input type="number" id="number2" name="number2" required>
+        <br><br>
+        <label for="number3">NÚMERO 3*</label>
+        <input type="number" id="number3" name="number3" required>
+        <br><br>
+        <label for="number4">NÚMERO 4</label>
+        <input type="number" id="number4" name="number4" required>
+        <br><br>
+        <label for="number5">NÚMERO 5</label>
+        <input type="number" id="number5" name="number5" required>
+        <br><br>
+        <label for="number6">NÚMERO 6</label>
+        <input type="number" id="number6" name="number6" required>
+
+    </form>
+
+    <div class="btn">
+        <div id="btnSend" class="btnSend" onclick="searchData()">Buscar</div>
+        <div id="btnClean" class="btnClean" onclick="cleanData()">Limpar Dados</div>
+    </div>
+
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>CONCURSO</th>
+                <th>DIA</th>
+                <th>DZ 1</th>
+                <th>DZ 2</th>
+                <th>DZ 3</th>
+                <th>DZ 4</th>
+                <th>DZ 5</th>
+                <th>DZ 6</th>
+                <th>Nº DE VENCEDORES</th>
+                <th>PREMIO SENA</th>
+                <th>PREMIO ACUMULADO</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 
 
-        <script>
-            document.getElementById("btnNumber").addEventListener("click", function () {
-                window.location.href = "/numbers";
-            });
 
-            document.getElementById("btnCity").addEventListener("click", function () {
-                window.location.href = "/cities";
-            });
-        </script>
+
+    <script>
+        function searchData() {
+            const form = document.getElementById("myForm");
+            const formData = new FormData(form);
+
+            const dz1 = formData.get("number1");
+            const dz2 = formData.get("number2");
+            const dz3 = formData.get("number3");
+            const dz4 = formData.get("number4");
+            const dz5 = formData.get("number5");
+            const dz6 = formData.get("number6");
+
+            if (!dz1 || !dz2 || !dz3) {
+                alert("Por favor, insira pelo menos 3 números para realizar a busca.");
+                return
+            }
+
+            fetch(`/api/megasena/filter?dz1=${dz1}&dz2=${dz2}&dz3=${dz3}&dz4=${dz4}&dz5=${dz5}&dz6=${dz6}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector("#myTable tbody");
+
+                    if (!data[0]) {
+                        return alert("Não houveram jogos com esses 3 números!")
+                    }
+
+                    data.forEach(item => {
+                        const row = document.createElement("tr");
+
+                        const concursoCell = document.createElement("td")
+                        concursoCell.textContent = item.concurso
+                        const dayCell = document.createElement("td");
+                        dayCell.textContent = item.data;
+                        row.appendChild(concursoCell);
+                        row.appendChild(dayCell);
+
+
+                        const dz1Cell = document.createElement("td");
+                        dz1Cell.textContent = item.dezenas[0];
+                        const dz2Cell = document.createElement("td");
+                        dz2Cell.textContent = item.dezenas[1];
+                        const dz3Cell = document.createElement("td");
+                        dz3Cell.textContent = item.dezenas[2];
+                        const dz4Cell = document.createElement("td");
+                        dz4Cell.textContent = item.dezenas[3];
+                        const dz5Cell = document.createElement("td");
+                        dz5Cell.textContent = item.dezenas[4];
+                        const dz6Cell = document.createElement("td");
+                        dz6Cell.textContent = item.dezenas[5];
+                        row.appendChild(dz1Cell);
+                        row.appendChild(dz2Cell);
+                        row.appendChild(dz3Cell);
+                        row.appendChild(dz4Cell);
+                        row.appendChild(dz5Cell);
+                        row.appendChild(dz6Cell);
+
+                        const winnersCell = document.createElement("td");
+                        winnersCell.textContent = item.premiacoes[0].ganhadores;
+                        row.appendChild(winnersCell);
+
+                        const awardCell = document.createElement("td")
+                        awardCell.textContent = item.premiacoes[0].valorPremio;
+                        row.appendChild(awardCell);
+
+                        const accumulatedCell = document.createElement("td")
+                        accumulatedCell.textContent = item.valorAcumuladoProximoConcurso;
+                        row.appendChild(accumulatedCell);
+
+                        tbody.appendChild(row);
+
+
+                    });
+
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+
+
+        function cleanData() {
+            window.location.href = "/"
+        }
+    </script>
 
 </body>
 
